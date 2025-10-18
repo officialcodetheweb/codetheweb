@@ -451,30 +451,59 @@
         
        
                     
-          <form id="contact" action="" method="post">
-            <div class="row">
-              <div class="col-md-6">
-                  <fieldset>
-                    <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="">
-                  </fieldset>
-                </div>
-                <div class="col-md-6">
-                  <fieldset>
-                    <input name="email" type="text" class="form-control" id="email" placeholder="Your Email" required="">
-                  </fieldset>
-                </div>
-              <div class="col-md-12">
-                <fieldset>
-                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
-                </fieldset>
-              </div>
-              <div class="col-md-12">
-                <fieldset>
-                  <button type="submit" id="form-submit" class="button">Send Message Now</button>
-                </fieldset>
-              </div>
-            </div>
-          </form>
+         <form id="contact" action="" method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <fieldset>
+        <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="">
+      </fieldset>
+    </div>
+    <div class="col-md-6">
+      <fieldset>
+        <input name="email" type="text" class="form-control" id="email" placeholder="Your Email" required="">
+      </fieldset>
+    </div>
+    <div class="col-md-12">
+      <fieldset>
+        <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
+      </fieldset>
+    </div>
+    <div class="col-md-12">
+      <fieldset>
+        <button type="submit" id="form-submit" class="button">Send Message Now</button>
+      </fieldset>
+    </div>
+  </div>
+</form>
+
+<script>
+  document.getElementById("contact").addEventListener("submit", function(event) {
+    event.preventDefault(); // stop form from reloading the page
+
+    // Get input values
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var message = document.getElementById("message").value;
+
+    // ✅ Replace this with your WhatsApp number (no "+" or spaces)
+    var phoneNumber = "233201234567";
+
+    // Create the message text
+    var fullMessage =
+      "Hi Code The Web, my name is " + name + 
+      ". My email is " + email + 
+      ". " + message;
+
+    // Encode for URL
+    var encodedMessage = encodeURIComponent(fullMessage);
+
+    // Build WhatsApp link
+    var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + encodedMessage;
+
+    // Open WhatsApp chat
+    window.open(whatsappURL, "_blank");
+  });
+</script>
         </div>
         <div class="col-md-6">
           <div id="map">
@@ -561,6 +590,7 @@
 </body>
 
 </html>
+
 
 
 
