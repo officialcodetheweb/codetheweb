@@ -451,7 +451,7 @@
         
        
                     
-         <form id="contact" action="" method="post">
+       <form id="contact">
   <div class="row">
     <div class="col-md-6">
       <fieldset>
@@ -475,6 +475,29 @@
     </div>
   </div>
 </form>
+
+<script>
+  document.getElementById("contact").addEventListener("submit", function(event) {
+    event.preventDefault(); // 🔥 stop the form from doing a normal post
+
+    // Get values
+    var name = document.getElementById("name").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var message = document.getElementById("message").value.trim();
+
+    // ✅ Replace with your WhatsApp number (no +, no spaces)
+    var phoneNumber = "+233551918658";
+
+    // Compose message
+    var text = "Hi Code The Web, my name is " + name + 
+               ". My email is " + email + 
+               ". " + message;
+
+    // Redirect to WhatsApp
+    var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(text);
+    window.open(whatsappURL, "_blank");
+  });
+</script>
 
 <script>
   document.getElementById("contact").addEventListener("submit", function(event) {
@@ -590,6 +613,7 @@
 </body>
 
 </html>
+
 
 
 
