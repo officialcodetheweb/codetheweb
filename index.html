@@ -449,33 +449,35 @@
         </div>
         <div class="col-md-6">
         
-       
-                    
-       <form id="contact">
-  <div class="row">
-    <div class="col-md-6">
-      <fieldset>
-        <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="">
-      </fieldset>
-    </div>
-    <div class="col-md-6">
-      <fieldset>
-        <input name="email" type="text" class="form-control" id="email" placeholder="Your Email" required="">
-      </fieldset>
-    </div>
-    <div class="col-md-12">
-      <fieldset>
-        <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
-      </fieldset>
-    </div>
-    <div class="col-md-12">
-      <fieldset>
-        <button type="submit" id="form-submit" class="button">Send Message Now</button>
-      </fieldset>
-    </div>
-  </div>
+<form id="contactForm">
+  <input type="text" id="name" placeholder="Your Name" required>
+  <input type="email" id="email" placeholder="Your Email" required>
+  <textarea id="message" placeholder="Your Message..." required></textarea>
+  <button type="submit">Send Message Now</button>
 </form>
 
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // stop default form submission
+
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let message = document.getElementById("message").value.trim();
+
+  // ✅ Replace this number with your WhatsApp number (no +, no spaces)
+  let phoneNumber = "233201234567";
+
+  // Build message
+  let fullMessage = Hi Code The Web, my name is ${name}. My email is ${email}. ${message};
+
+  // Open WhatsApp
+  let whatsappURL = https://wa.me/${phoneNumber}?text=${encodeURIComponent(fullMessage)};
+  window.open(whatsappURL, "_blank");
+});
+</script>
+
+</body>
+</html>
 <script>
   document.getElementById("contact").addEventListener("submit", function(event) {
     event.preventDefault(); // 🔥 stop the form from doing a normal post
@@ -613,6 +615,7 @@
 </body>
 
 </html>
+
 
 
 
