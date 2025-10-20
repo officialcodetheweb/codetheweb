@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Registration | Code The Web</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {box-sizing: border-box; font-family: 'Poppins', sans-serif;}
+    body {
+      margin: 0;
+      background: #f8f9fb;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: #0077ff;
+      color: #fff;
+    }
+    header h1 {margin: 0; font-size: 24px;}
+    .flyer {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .form-container {
+      background: #fff;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .form-container h2 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 15px;
+      transition: border-color .3s;
+    }
+    input:focus, select:focus {border-color: #0077ff;}
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0077ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .3s;
+    }
+    button:hover {background: #005fd4;}
+    .note {
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Skilled-Up Bootcamp Registration</h1>
+  </header>
+
+  <!-- Program Flyer -->
+  <img src="assets/images/register.jpg" alt="Program Flyer" class="flyer">
+
+  <!-- Registration Form -->
+  <div class="form-container">
+    <h2>Register Now</h2>
+    <form id="registrationForm">
+      <label for="picture">Upload Picture</label>
+      <input type="file" id="picture" accept="image/*" required>
+
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" placeholder="Enter your full name" required>
+
+      <label for="contact">Contact Number</label>
+      <input type="tel" id="contact" placeholder="e.g. 024XXXXXXX" required>
+
+      <label for="sex">Sex</label>
+      <select id="sex" required>
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+
+      <label for="location">Location</label>
+      <input type="text" id="location" placeholder="Enter your location" required>
+
+      <button type="submit">Submit & Pay (MoMo)</button>
+    </form>
+
+    <p class="note">Secure Mobile Money payment powered by Paystack.</p>
+  </div>
+
+  <!-- Paystack SDK -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('fullname').value;
+      const contact = document.getElementById('contact').value;
+      const sex = document.getElementById('sex').value;
+      const location = document.getElementById('location').value;
+
+      // Your WhatsApp line
+      const whatsappNumber = "+233551918658"; // e.g., 233245678901
+
+      // Paystack setup
+      let handler = PaystackPop.setup({
+        key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxx', // <-- Replace with your own PUBLIC KEY
+        email: 'officialcodetheweb@gmail.com', // can be any dummy email
+        amount: 5000 * 100, // Amount in pesewas (e.g. 5000 = GHS 50)
+        currency: 'GHS',
+        channels: ['mobile_money', 'card'],
+        callback: function(response) {
+          // When payment succeeds
+          const message = `Hello, I just registered for the Skilled-Up Bootcamp.%0A
+Full Name: ${name}%0A
+Contact: ${contact}%0A
+Sex: ${sex}%0A
+Location: ${location}%0A
+Transaction Ref: ${response.reference}`;
+
+          const url = https://wa.me/${whatsappNumber}?text=${message};
+          window.location.href = url;
+        },
+        onClose: function() {
+          alert('Payment window closed.');
+        }
+      });
+      handler.openIframe();
+    });
+  </script>
+
+</body>
+</html>
